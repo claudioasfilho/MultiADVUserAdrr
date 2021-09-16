@@ -239,10 +239,17 @@ static void iBeacon_set_Creator(uint8_t* iBeacon_set_handle, bd_addr *addr)
     0);      // max. num. adv. events
   app_assert_status(sc);
 
+
+  /*
+   * To set an advertiser address of the public address type, use command sl_bt_advertiser_set_random_address() with value 0xfe for the addr_type parameter.
+   * Note that this address setting cannot be used for connectable advertising.
+   * The setting can be removed with command sl_bt_advertiser_clear_random_address().
+   */
+
+
    sc = sl_bt_advertiser_set_random_address ( *iBeacon_set_handle,0xfe,*addr,&out_addr) ;
 
-   //sc = sl_bt_advertiser_set_random_address ( *iBeacon_set_handle,3,*addr,&out_addr) ;
-   //app_assert_status(sc);
+
    app_log("E: 0x%04x", (int)sc);
 
   // Start advertising in user mode and disable connections.
